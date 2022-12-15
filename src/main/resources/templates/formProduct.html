@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template" >
+<head>
+    <meta charset="UTF-8">
+    <title>Form Patient</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.2/css/bootstrap.min.css" >
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="col-md-6 offset-3">
+        <form method="Post" th:action="@{save(page=${page},keyword=${keyword})}" >
+            <div class="">
+                <label>Nom</label>
+                <input class="form-control" type="text" name="productName" th:value="${produit.productName}" >
+                <span class="text-danger" th:errors="${produit.productName}" ></span>
+            </div>
+            <div class="">
+                <label>productPrice</label>
+                <input class="form-control" type="text" name="productPrice" th:value="${produit.productPrice}" >
+                <span class="text-danger" th:errors="${produit.productPrice}" ></span>
+            </div>
+            <div class="">
+                <label>category</label>
+                <input class="form-control" type="text" name="category" th:value="${produit.category}" >
+                <span class="text-danger" th:errors="${produit.category}"></span>
+            </div>
+            <div class="">
+                <label>description</label>
+                <input class="form-control" type="text" name="description" th:value="${produit.description}" >
+                <span class="text-danger" th:errors="${produit.description}"></span>
+            </div>
+            <div class="">
+                <label>quantity</label>
+                <input class="form-control" type="number" name="quantity" th:value="${produit.quantity}" >
+                <span class="text-danger" th:errors="${produit.quantity}"></span>
+            </div>
+            <div class="">
+                <label>Stock</label>
+                <select class="form-control" name="stock">
+                    <option  th:each="stock:${stocks}" th:value="${stock.id}" th:text="${stock.firstName}+ ' ' + ${stock.lastName}" value=""/>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

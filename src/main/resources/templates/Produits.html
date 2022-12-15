@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Produits page</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.2/css/bootstrap.min.css" >
+</head>
+<body>
+<div layout:fragment="content1" >
+    <div class="container mt-2" >
+        <div class="card">
+            <div class="card-header">Liste de Produits</div>
+            <div class="card-body">
+                <form method="get" th:action="@{index}">
+                    <label>Key Word</label>
+<!--                    <input type="text" name="Keyword" th:value=${keyword}>-->
+                    <button type="submit" class="btn btn-primary">Chercher</button>
+                </form>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantité</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="p:${produits}">
+                        <td th:text="${p.id}"></td>
+                        <td th:text="${p.productName}"></td>
+                        <td th:text="${p.productPrice}"></td>
+                        <td th:text="${p.category}"></td>
+                        <td th:text="${p.description}"></td>
+                        <td th:text="${p.quantity}"></td>
+                        <td>
+                            <a onclick="return confirm('sur')" class="btn btn-danger"
+                               th:href="@{delete(id=${p.id})}">
+                                Delete
+                            </a>
+                        </td>
+                        <td>
+                            <a  class="btn btn-success"
+                                th:href="@{editProduit(id=${p.id})}">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+              <!--  <ul class="nav nav-pills" >
+                    <li th:each="page,status:${pages}">
+                        <a th:class="${status.index==currentPage?'btn btn-primary ml-1':'btn btn-outline-primary ml-1'}"
+                           th:text="${status.index}"
+                           th:href="@{index(page=${status.index},keyword=${keyword})}" ></a>
+                    </li>
+                </ul>-->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
